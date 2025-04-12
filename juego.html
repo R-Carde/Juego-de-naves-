@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset='utf-8'>
+  <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+  <title>Juego 2D</title>
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+  <link rel="stylesheet" href="style.css">
+  <script src='phaser.js'></script>
+  <script src="script.js"></script>
+</head>
+<body>
+  <!-- Mueve el audio aquí -->
+  <audio id="musicaFondo" autoplay loop>
+    <source src="sound/fondo.mp3" type="audio/mpeg">
+    Tu navegador no soporta audio HTML5.
+  </audio>
+
+  <div id="bloque_juego"></div>
+
+  <script>
+    // Solo se activa con clic una vez
+    window.addEventListener('click', () => {
+      const musica = document.getElementById('musicaFondo');
+      if (musica.paused) {
+        musica.volume = 0.5;
+        musica.play();
+      }
+    }, { once: true });
+  </script>
+</body>
+</html>

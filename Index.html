@@ -1,24 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset='utf-8'>
-	<meta http-equiv='X-UA-Compatible' content='IE=edge'>
-	<title>Juego 2d</title>
-	<meta name='viewport' content='width=device-width, initial-scale=1'>
-	<script src='phaser.js'></script>
-	<script src="script.js"></script>
-    <style>
-        body, html {
-       background-color: #000;  /* Fondo opcional */
-  }
-        #bloque_juego {
-          width: 370px;
-          height: 900px;
-          margin: 0 auto;
-        }
-      </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Start Game</title>
+
+  <link rel="stylesheet" href="style.css">
+
 </head>
 <body>
-    <div id="bloque_juego"></div>
+  <!-- Música de fondo -->
+  <audio id="musicaFondo" autoplay loop>
+    <source src="sound/menu.mp3" type="audio/mpeg" />
+    Tu navegador no soporta audio HTML5.
+  </audio>
+
+  <div class="container">
+    <h1>START GAME</h1>
+    <ul class="menu">
+      <li><a href="juego.html" class="menu-option selected">1 PLAYER</a></li>
+      <li><a href="comingsoon.html" class="menu-option">2 PLAYERS</a></li>
+    </ul>
+    <p class="start">PRESS START</p>
+  </div>
+
+  <script>
+    // Música
+    window.addEventListener('click', () => {
+      const musica = document.getElementById('musicaFondo');
+      if (musica.paused) {
+        musica.volume = 0.5;
+        musica.play();
+      }
+    }, { once: true });
+
+    // Navegación del menú
+    const options = document.querySelectorAll(".menu-option");
+    let selectedIndex = 0;
+
+    function updateSelection() {
+      options.forEach((opt, i) => {
+        opt.classList.toggle("selected", i === selectedIndex);
+      });
+    }
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowUp") {
+        selectedIndex = (selectedIndex - 1 + options.length) % options.length;
+        updateSelection();
+      } else if (e.key === "ArrowDown") {
+        selectedIndex = (selectedIndex + 1) % options.length;
+        updateSelection();
+      } else if (e.key === "Enter") {
+        options[selectedIndex].click();
+      }
+    });
+  </script>
 </body>
 </html>
